@@ -9,7 +9,7 @@ var view = {
 		var messageArea = getEID("messageArea");
 		messageArea.innerHTML = msg;
 	},
-	displayHit: function(location, img) {
+	displayHit: function(location, img) {  // Need to Troubleshoot, hardcoded hits not showing now!!!!
 		var cell = getEID(location);
 		cell.setAttribute("class", img); // Changed from hard code "hit" to img variable
 	},
@@ -26,7 +26,7 @@ var view = {
 		shipsSunk: 0,
 		
 		ships: [
-			{ locations: [0, 0, 0], hits: ["", "", ""] }, // Ship 1 
+			{ locations: [0, 0, 0], hits: ["hitBBAFT", "hitBBMID", "hitBBFRNT"] }, // Ship 1 
 			{ locations: [0, 0, 0], hits: ["", "", ""] }, // Ship 2
 			{ locations: [0, 0, 0], hits: ["", "", ""] } // Ship 3
 		],
@@ -37,11 +37,10 @@ var view = {
 			for (var i = 0; i < this.numShips; i++) {
 				var ship = this.ships[i]; //sets index and location of the ship# to be checked
 				var index = ship.locations.indexOf(guess); // Chained variable that returns -1 if not found
-				alert("guess is:" + guess);
+				//alert("guess is:" + guess);
 				var img = "";
-				alert("index value is: " + index);
-				// Check to see if the ship
-				// has already been hit, message the user, and return true.
+				//alert("index value is: " + index);
+				// Check to see if the ship has already been hit, message the user, and return true.
 				if (ship.hits[index] === "hit*") { // added string * to inlcude any word beginning with "hit"
 					view.displayMessage("Oops, you already hit that location!");
 					return true;
@@ -56,10 +55,11 @@ var view = {
 					else {
 						ship.hits[index] === "hitBBFRNT"; //mark the array with a hit for the front image	
 						img = "hitBBFRNT";}
-
+					alert(ship.hits[index]);
+					alert(img);
 					view.displayHit(guess,img); //pass to the viewer the guessed location and damage display image
 					view.displayMessage("HIT!");
-	
+					
 					if (this.isSunk(ship)) {
 						view.displayMessage("You sank my battleship!");
 						this.shipsSunk++;
