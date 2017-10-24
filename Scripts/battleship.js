@@ -48,13 +48,13 @@ var view = {
 				} else if (index >= 0) {
 				// Check to see which section of the ship is hit an assign the appropriate value and view
 					if (index = 0) {
-						ship.hits[index] = "hitBBAFT"; //mark the array with a hit for the aft image
+						ship.hits[index] === "hitBBAFT"; //mark the array with a hit for the aft image
 						img  = "hitBBAFT";}
 					else if (index = 1) {
-						ship.hits[index] = "hitBBMID";//mark the array with a hit for the middle image
+						ship.hits[index] === "hitBBMID";//mark the array with a hit for the middle image
 						img  = "hitBBMID";}
 					else {
-						ship.hits[index] = "hitBBFRNT"; //mark the array with a hit for the front image	
+						ship.hits[index] === "hitBBFRNT"; //mark the array with a hit for the front image	
 						img = "hitBBFRNT";}
 
 					view.displayHit(guess,img); //pass to the viewer the guessed location and damage display image
