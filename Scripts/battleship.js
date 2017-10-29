@@ -19,7 +19,13 @@ var view = {
 	displayMiss: function (location) {
 		var cell = getEID(location);
 		cell.setAttribute("class", "miss");
-	}
+	},
+	displayFinal: function (msg) {
+		// alert(msg);
+		var final = getEID("final");
+		final.innerHTML = msg;
+	},
+
 };
 
 
@@ -31,9 +37,9 @@ var model = {
 	shipsSunk: 0,
 
 	ships: [{
-			locations: [0, 0, 0],
-			hits: ["", "", ""],
-			direction: [0]
+			locations: [0, 0, 0], //Generated grid locations 
+			hits: ["", "", ""], //Array to hold hit locations 
+			direction: [1] //Facing Vertical or Horizontal
 		}, // Ship 1 
 		{
 			locations: [0, 0, 0],
@@ -52,27 +58,31 @@ var model = {
 		for (var i = 0; i < this.numShips; i++) {
 			var ship = this.ships[i]; //sets index and location of the ship# to be checked
 			var index = ship.locations.indexOf(guess); // Chained variable that returns -1 if not found
+			var d = ship.direction[0]; //retrieve the ship direction for img variable
+
+
 			// Check to see if the ship has already been hit, message the user, and return true.
-			
 			if (ship.hits[index] === "hitBBAFT" || ship.hits[index] === "hitBMID" || ship.hits[index] === "hitBFRNT") {
 				view.displayMessage("Oops, you already hit that location!");
 				return true;
 
 			} else if (index >= 0) {
 				// Check to see which section of the ship is hit an assign the appropriate value and view
-				// insert a check to see if vertical or horizontal ship for images
-				
-					if (index === 0) {
+				// d variable added to image to display a horz image for 0 or vert image for 1 of ships.direction
+
+
+				if (index === 0) {
 					ship.hits[index] = "hitBBAFT"; //mark the array with a hit for the aft image
-					var img = "hitBBAFT";
-					} else if (index === 1) {
+					var img = "hitBBAFT" + d;
+				} else if (index === 1) {
 					ship.hits[index] = "hitBBMID"; //mark the array with a hit for the middle image
-					var img = "hitBBMID";
-					} else {
+					var img = "hitBBMID" + d;
+				} else {
 					ship.hits[index] = "hitBBFRNT"; //mark the array with a hit for the front image	
-					var img = "hitBBFRNT";
-					}
-				
+					var img = "hitBBFRNT" + d;
+				}
+
+
 				view.displayHit(guess, img); //pass to the viewer the guessed location and damage display image
 				view.displayMessage("HIT!");
 
@@ -90,7 +100,7 @@ var model = {
 	// Check to see if number of hits in array  = length of ship
 	isSunk: function (ship) {
 		for (var i = 0; i < this.shipLength; i++) {
-			if (ship.hits[i] !== "hitBBAFT" && ship.hits[i] !== "hitBBMID" && ship.hits[i] !== "hitBBFRNT"  ) {
+			if (ship.hits[i] !== "hitBBAFT" && ship.hits[i] !== "hitBBMID" && ship.hits[i] !== "hitBBFRNT") {
 				return false;
 			}
 		}
@@ -99,7 +109,7 @@ var model = {
 	// Ship generate section - Sets the ship random location horiz/vert, while checking for any collisions or going off board
 	generateShipLocations: function () {
 		var locations;
-	
+
 		for (var i = 0; i < this.numShips; i++) {
 			do { // do while loop used until there are no collisions
 				locations = this.generateShip();
@@ -107,21 +117,21 @@ var model = {
 			this.ships[i].locations = locations;
 			var direction = this.addDirectionToArray(); //how to retrieve shipdir from addDirectionToArray without re-running the function?
 			//this.ships[i].direction = direction;
-			
+
 		}
 		console.log("Ships array: ");
 		console.log(this.ships);
 	},
 
-	addDirectionToArray: function(dir){
+	addDirectionToArray: function (dir) {
 		var shipdir = [dir]
 		// alert (shipdir[0]);
 		return shipdir;
 	},
 
-	generateShipDirection: function(){
+	generateShipDirection: function () {
 		var dir = Math.floor(Math.random() * 2);
-		this.addDirectionToArray (dir);
+		this.addDirectionToArray(dir);
 		return dir;
 	},
 
@@ -174,7 +184,7 @@ var controller = {
 			this.guesses++;
 			var hit = model.fire(location);
 			if (hit && model.shipsSunk === model.numShips) {
-				view.displayMessage("You sank the Fleet, in " + this.guesses + " guesses");
+				view.displayFinal("You sank the Fleet, in " + this.guesses + " guesses");
 			}
 		}
 	}
