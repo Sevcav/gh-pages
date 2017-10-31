@@ -112,7 +112,7 @@ var model = {
 
 		for (var i = 0; i < this.numShips; i++) {
 			do { // do while loop used until there are no collisions
-				locations = this.generateShip();
+				locations = this.generateShip(); //return of array built as newShipLocations
 			} while (this.collision(locations));
 			this.ships[i].locations = locations;
 			var direction = this.addDirectionToArray(); //how to retrieve shipdir from addDirectionToArray without re-running the function?
