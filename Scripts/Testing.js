@@ -157,3 +157,33 @@ function testPrint() {
     printwBreak(txt);
     printwBreak("yes indeed", "tb02");
 };
+
+// While LoopTest
+function printArray(array, seperator){
+    if (!seperator){
+      seperator = '\n';
+    }
+    
+    let result = "";
+    let counterStart = 0;
+    let max = counterStart + array.length;
+    
+    while (counterStart < max){
+      result = result + array[counterStart];
+      ++counterStart;
+    }
+    return result;
+    
+};
+    let x = [1,2,3];
+    forPrintArray(x);
+
+// For Loop Test
+function forPrintArray(array){
+    let result = "";
+    for (i=0; i < array.length; i++){
+        result = result + array[i];
+    };
+    return result;
+};
+

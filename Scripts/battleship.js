@@ -70,16 +70,16 @@ var model = {
 				// Check to see which section of the ship is hit an assign the appropriate value and view
 				// d variable added to image to display a horz image for 0 or vert image for 1 of ships.direction
 
-
+				
 				if (index === 0) {
 					ship.hits[index] = "hitBBAFT"; //mark the array with a hit for the aft image
-					var img = "hitBBAFT" + d;
+					var img = "hitship";
 				} else if (index === 1) {
 					ship.hits[index] = "hitBBMID"; //mark the array with a hit for the middle image
-					var img = "hitBBMID" + d;
+					var img = "hitship";
 				} else {
 					ship.hits[index] = "hitBBFRNT"; //mark the array with a hit for the front image	
-					var img = "hitBBFRNT" + d;
+					var img = "hitship";
 				}
 
 
