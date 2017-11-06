@@ -9,7 +9,14 @@
 var view = {
 	displayMessage: function (msg) {
 		var messageArea = getEID("messageArea");
-		messageArea.innerHTML = msg;
+		var messageAreaHit = getEID("messageAreaHit");
+		if(msg === "HIT!" || msg === "You sank my battleship!"){
+			messageArea.innerHTML = "";	
+			messageAreaHit.innerHTML = msg;						
+		}
+		else
+			messageAreaHit.innerHTML = "";	
+			messageArea.innerHTML = msg;
 	},
 	displayHit: function (location, locImg) { // Passed from Model.Fire Function
 		// test: alert('Hit Location is: '+ location + ' ,image is : ' + locImg);
@@ -58,7 +65,7 @@ var model = {
 		for (var i = 0; i < this.numShips; i++) {
 			var ship = this.ships[i]; //sets index and location of the ship# to be checked
 			var index = ship.locations.indexOf(guess); // Chained variable that returns -1 if not found
-			var d = ship.direction[0]; //retrieve the ship direction for img variable
+
 
 
 			// Check to see if the ship has already been hit, message the user, and return true.
@@ -70,7 +77,7 @@ var model = {
 				// Check to see which section of the ship is hit an assign the appropriate value and view
 				// d variable added to image to display a horz image for 0 or vert image for 1 of ships.direction
 
-				
+
 				if (index === 0) {
 					ship.hits[index] = "hitBBAFT"; //mark the array with a hit for the aft image
 					var img = "hitship";
@@ -87,6 +94,7 @@ var model = {
 				view.displayMessage("HIT!");
 
 				if (this.isSunk(ship)) {
+					this.drawSunk(ship);
 					view.displayMessage("You sank my battleship!");
 					this.shipsSunk++;
 				}
@@ -100,12 +108,32 @@ var model = {
 	// Check to see if number of hits in array  = length of ship
 	isSunk: function (ship) {
 		for (var i = 0; i < this.shipLength; i++) {
+
+			//if (ship.hits[i] !== "hit") {
 			if (ship.hits[i] !== "hitBBAFT" && ship.hits[i] !== "hitBBMID" && ship.hits[i] !== "hitBBFRNT") {
 				return false;
+
 			}
+
 		}
+
 		return true;
 	},
+	drawSunk: function (ship) {
+		var directionCheck1 = ship.locations[0];
+		var directionCheck2 = ship.locations[1];
+		if (directionCheck1.charAt(0) === directionCheck2.charAt(0)) {
+			view.displayHit(ship.locations[0], "hitBBAFT0");
+			view.displayHit(ship.locations[1], "hitBBMID0");
+			view.displayHit(ship.locations[2], "hitBBFRNT0");
+		} else {
+			view.displayHit(ship.locations[0], "hitBBAFT1");
+			view.displayHit(ship.locations[1], "hitBBMID1");
+			view.displayHit(ship.locations[2], "hitBBFRNT1");
+		}
+
+	},
+
 	// Ship generate section - Sets the ship random location horiz/vert, while checking for any collisions or going off board
 	generateShipLocations: function () {
 		var locations;
@@ -115,23 +143,16 @@ var model = {
 				locations = this.generateShip(); //return of array built as newShipLocations
 			} while (this.collision(locations));
 			this.ships[i].locations = locations;
-			var direction = this.addDirectionToArray(); //how to retrieve shipdir from addDirectionToArray without re-running the function?
-			//this.ships[i].direction = direction;
+
 
 		}
 		console.log("Ships array: ");
 		console.log(this.ships);
 	},
 
-	addDirectionToArray: function (dir) {
-		var shipdir = [dir]
-		// alert (shipdir[0]);
-		return shipdir;
-	},
 
 	generateShipDirection: function () {
 		var dir = Math.floor(Math.random() * 2);
-		this.addDirectionToArray(dir);
 		return dir;
 	},
 

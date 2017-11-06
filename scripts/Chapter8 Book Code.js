@@ -100,7 +100,7 @@ var model = {
 		for (var i = 0; i < this.shipLength; i++)  {
 
 			if (ship.hits[i] !== "hit") {
-
+		  //if(ship.hits[i] !== "hitBBAFT" && ship.hits[i] !== "hitBBMID" && ship.hits[i] !== "hitBBFRNT"){ 
 				return false;
 
 			}
