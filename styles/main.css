@@ -1,0 +1,12 @@
+/* Set Font size for button attribute */
+button {
+    font-size: 24px;
+}
+
+input {
+    font-size: 24px;
+}
+
+<p style="text-indent: 5em;">
+The first line of this paragraph will be indented about five characters, similar to a tabbed indent.
+</p>
