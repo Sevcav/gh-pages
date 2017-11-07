@@ -1,11 +1,14 @@
 /* CIS-133JS Ken Chapman 
-    v0.1
-	BattlelShip Game Chapter 8 of HeadStart JS
-	Modified with graphics for different ships
+    v1.5
+	-BattlelShip Game Chapter 8 of HeadStart JS
+		-Modified with graphics for different ships
+		-Moved Styles to css.main within styles folder
+		-Added board title image
+		-Changed sunk logic to display ship when sank
+		-Made Comments on functions and code throughout
 */
-// Game View  Section
 
-
+// Game View Section
 var view = {
 	displayMessage: function (msg) {
 		var messageArea = getEID("messageArea");
@@ -19,7 +22,6 @@ var view = {
 			messageArea.innerHTML = msg;
 	},
 	displayHit: function (location, locImg) { // Passed from Model.Fire Function
-		// test: alert('Hit Location is: '+ location + ' ,image is : ' + locImg);
 		var cell = getEID(location);
 		cell.setAttribute("class", locImg); // Changed from hard code "hit" to img variable set in Model.Fire Function
 	},
@@ -28,11 +30,9 @@ var view = {
 		cell.setAttribute("class", "miss");
 	},
 	displayFinal: function (msg) {
-		// alert(msg);
 		var final = getEID("final");
 		final.innerHTML = msg;
 	},
-
 };
 
 
@@ -46,7 +46,7 @@ var model = {
 	ships: [{
 			locations: [0, 0, 0], //Generated grid locations 
 			hits: ["", "", ""], //Array to hold hit locations 
-			direction: [1] //Facing Vertical or Horizontal
+			direction: [0] //Facing Vertical or Horizontal
 		}, // Ship 1 
 		{
 			locations: [0, 0, 0],
@@ -59,7 +59,6 @@ var model = {
 			direction: [0]
 		} // Ship 3
 	],
-
 
 	fire: function (guess) {
 		for (var i = 0; i < this.numShips; i++) {
@@ -105,20 +104,18 @@ var model = {
 		view.displayMessage("You missed.");
 		return false;
 	},
+
 	// Check to see if number of hits in array  = length of ship
 	isSunk: function (ship) {
 		for (var i = 0; i < this.shipLength; i++) {
-
-			//if (ship.hits[i] !== "hit") {
 			if (ship.hits[i] !== "hitBBAFT" && ship.hits[i] !== "hitBBMID" && ship.hits[i] !== "hitBBFRNT") {
 				return false;
-
 			}
-
 		}
-
 		return true;
 	},
+
+	//Replaces Hit icon in each location with ship image of either horizontal or vertical image
 	drawSunk: function (ship) {
 		var directionCheck1 = ship.locations[0];
 		var directionCheck2 = ship.locations[1];
@@ -131,7 +128,6 @@ var model = {
 			view.displayHit(ship.locations[1], "hitBBMID1");
 			view.displayHit(ship.locations[2], "hitBBFRNT1");
 		}
-
 	},
 
 	// Ship generate section - Sets the ship random location horiz/vert, while checking for any collisions or going off board
@@ -143,23 +139,20 @@ var model = {
 				locations = this.generateShip(); //return of array built as newShipLocations
 			} while (this.collision(locations));
 			this.ships[i].locations = locations;
-
-
 		}
 		console.log("Ships array: ");
 		console.log(this.ships);
 	},
 
-
+	// Generates a random ship direction, returning 1 or 0 for horizontal and vertical ship placement
 	generateShipDirection: function () {
 		var dir = Math.floor(Math.random() * 2);
 		return dir;
 	},
 
+	//Generates each ship location and places position points in ship array; checks for on board an no collisions
 	generateShip: function () {
 		var direction = this.generateShipDirection();
-
-		//var direction = Math.floor(Math.random() * 2);
 		var row, col;
 
 		if (direction === 1) { // horizontal
@@ -181,6 +174,7 @@ var model = {
 		return newShipLocations;
 	},
 
+	//Checks pre-existing ship locations, if true, ship generator re-runs until no collisions exist
 	collision: function (locations) {
 		for (var i = 0; i < this.numShips; i++) {
 			var ship = this.ships[i];
@@ -195,10 +189,9 @@ var model = {
 
 };
 
-// Game Controller section 
+// Game Controller section, passed guess to model section
 var controller = {
 	guesses: 0,
-
 	processGuess: function (guess) {
 		var location = parseGuess(guess);
 		if (location) {
@@ -213,10 +206,8 @@ var controller = {
 
 
 // Helper function to parse a guess from the user
-
 function parseGuess(guess) {
 	var alphabet = ["A", "B", "C", "D", "E", "F", "G"];
-
 	if (guess === null || guess.length !== 2) {
 		alert("Oops, please enter a letter and a number on the board.");
 	} else {
@@ -249,6 +240,7 @@ function getEVal(id) {
 
 // Web Page/User Event handlers
 
+//On Fire button click execution
 function handleFireButton() {
 	var guessInput = document.getElementById("guessInput");
 	var guess = guessInput.value.toUpperCase();
@@ -258,6 +250,7 @@ function handleFireButton() {
 	guessInput.value = "";
 };
 
+//On Enter (return) keyboard click execution
 function handleKeyPress(e) {
 	var fireButton = document.getElementById("fireButton");
 
@@ -270,7 +263,6 @@ function handleKeyPress(e) {
 
 
 // init - called when the page has completed loading
-
 window.onload = init;
 
 function init() {
