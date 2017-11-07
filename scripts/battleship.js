@@ -222,21 +222,14 @@ function parseGuess(guess) {
 		}
 	}
 	return null;
-};
+}
 
 //  Helper Fucntion to get HTML element from the document by using the element id property
 function getEID(id) {
 	return document.getElementById(id);
-};
-
-// Helper Funciton to Get the text (the value property for an 
-// input box or a textarea given the HTML ID
-function getEVal(id) {
-	return getEID(id).value;
-};
+}
 
 // Web Page/User Event handlers
-
 //On Fire button click execution
 function handleFireButton() {
 	var guessInput = document.getElementById("guessInput");
@@ -245,7 +238,7 @@ function handleFireButton() {
 	controller.processGuess(guess);
 
 	guessInput.value = "";
-};
+}
 
 //On Enter (return) keyboard click execution
 function handleKeyPress(e) {
@@ -256,7 +249,7 @@ function handleKeyPress(e) {
 		fireButton.click();
 		return false;
 	}
-};
+}
 
 
 // init - called when the page has completed loading
@@ -273,4 +266,4 @@ function init() {
 
 	// place the ships on the game board
 	model.generateShipLocations();
-};
+}
