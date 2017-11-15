@@ -82,7 +82,7 @@ table {
     border-spacing: 0px;
 }
 
-td {
+td { border: 2px rgb(83, 175, 19);
     width: 94px;
     height: 94px;
 }

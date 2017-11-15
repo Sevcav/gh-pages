@@ -46,18 +46,28 @@ var model = {
 	ships: [{
 			locations: [0, 0, 0], //Generated grid locations 
 			hits: ["", "", ""], //Array to hold hit locations 
-			direction: [0] //Facing Vertical or Horizontal
+			shipLength: 2
 		}, // Ship 1 
 		{
 			locations: [0, 0, 0],
 			hits: ["", "", ""],
-			direction: [0]
+			shipLength: 3
 		}, // Ship 2
 		{
 			locations: [0, 0, 0],
 			hits: ["", "", ""],
-			direction: [0]
-		} // Ship 3
+			ShipLength: 3
+		}, // Ship 3
+		{
+			locations: [0, 0, 0, 0],
+			hits: ["", "", "", ""],
+			ShipLength: 4
+		}, // Ship 4
+		{
+			locations: [0, 0, 0, 0, 0],
+			hits: ["", "", "", "", ""],
+			shipLength: 5
+		} // Ship 5
 	],
 
 	fire: function (guess) {
@@ -68,7 +78,7 @@ var model = {
 
 
 			// Check to see if the ship has already been hit, message the user, and return true.
-			if (ship.hits[index] === "hitBBAFT" || ship.hits[index] === "hitBMID" || ship.hits[index] === "hitBFRNT") {
+			if (ship.hits[index] === "hitBBAFT" || ship.hits[index] === "hitBBMID" || ship.hits[index] === "hitBBFRNT") {
 				view.displayMessage("Oops, you already hit that location!");
 				return true;
 
@@ -76,6 +86,17 @@ var model = {
 				// Check to see which section of the ship is hit an assign the appropriate value and view
 				// d variable added to image to display a horz image for 0 or vert image for 1 of ships.direction
 				var img = "hitship";
+
+
+				/*Cruiser Ship Code
+				if (index === 0) {
+					ship.hits[index] = "hitCLAFT"; //mark the array with a hit for the aft image
+				} else if (index === 1) {
+					ship.hits[index] = "hitCLMID"; //mark the array with a hit for the middle image
+				} else {
+					ship.hits[index] = "hitCLFRNT"; //mark the array with a hit for the front image	
+				}
+				*/
 
 				if (index === 0) {
 					ship.hits[index] = "hitBBAFT"; //mark the array with a hit for the aft image
@@ -117,10 +138,12 @@ var model = {
 		var directionCheck1 = ship.locations[0];
 		var directionCheck2 = ship.locations[1];
 		if (directionCheck1.charAt(0) === directionCheck2.charAt(0)) {
+			//Horizonal
 			view.displayHit(ship.locations[0], "hitBBAFT0");
 			view.displayHit(ship.locations[1], "hitBBMID0");
 			view.displayHit(ship.locations[2], "hitBBFRNT0");
 		} else {
+			//Vertical
 			view.displayHit(ship.locations[0], "hitBBAFT1");
 			view.displayHit(ship.locations[1], "hitBBMID1");
 			view.displayHit(ship.locations[2], "hitBBFRNT1");
@@ -187,6 +210,8 @@ var model = {
 };
 
 // Game Controller section, passed guess to model section
+
+
 var controller = {
 	guesses: 0,
 	processGuess: function (guess) {
@@ -198,7 +223,20 @@ var controller = {
 				view.displayFinal("You sank the Fleet, in " + this.guesses + " guesses");
 			}
 		}
+	{	
 	}
+	},
+
+	getCell: function(eventObj){
+		let tdId = eventObj.target.id;
+		const ALPHA = "ABCDEFG";
+		let row = tdId[0];
+		let rowLetter = ALPHA[row];
+		let colNumber = tdId[1];
+		let cellAddr = rowLetter + colNumber;
+		controller.processGuess(cellAddr);
+	},
+
 };
 
 
@@ -255,7 +293,17 @@ function handleKeyPress(e) {
 // init - called when the page has completed loading
 window.onload = init;
 
+
 function init() {
+	//Get area TextID with Mouse
+	let tdList = document.getElementsByTagName("td");
+
+	// add an onclick event to each td element in the list
+	for(let tdIndex =0; tdIndex < tdList.length; tdIndex ++){
+		let tdElement = tdList[tdIndex];
+		tdElement.onclick = controller.getCell;
+	}
+
 	// Fire! button onclick handler
 	var fireButton = document.getElementById("fireButton");
 	fireButton.onclick = handleFireButton;
