@@ -62,19 +62,22 @@ function concentrationFlipcard(card,imgID){
                     card_values.push(val);
                     card_card_ids.push(card.id);
                     guesses += 1;
+                    console.log(card_values);
                 //check to see if match, if so add to total cards fliped count and clear holding arrays
                     if(card_values[0] === card_values[1]){
                         cards_flipped += 2; 
+                        console.log(cards_flipped);
+                        console.log(card_array.length);
                         // Clear both holding arrays
                         card_values = [];
                         card_card_ids = [];
                         // Check to see if the whole board is cleared
                         if(cards_flipped === card_array.length){
-                            //add text area here, and a score count.
+                            //add text area here, and a score count, and not just and alert.
                             alert("Great Memory!, you have matched everything in "+ guesses +" guesses");
                             //clear board
                             document.getElementById('concentration_board').innerHTML = "";
-                            //Build New Game
+                            //Build New Game                            
                             newBoard();
                         }
                     } else {
