@@ -1,0 +1,36 @@
+/* Set Font size for button attribute */
+button {
+    font-size: 24px;
+}
+
+div#concentration_board{
+	background:rgb(17, 17, 17);
+	border:#999 1px solid;
+	width:770px;
+    height:805px;
+    position: left top;
+	padding:5px;
+	margin:10px auto;
+}
+div#concentration_board > div{
+    background: url("../images/BackofCard.jpg") no-repeat;
+	border:#000 1px solid;
+	width:190px;
+    height:266px;
+    position: left top;
+	float:left;
+	margin:0px;
+	padding:0px;
+	font-size:64px;
+	cursor: pointer;
+    text-align: center;
+    line-height: 500;
+}
+
+div#final {
+    position: absolute;
+    top: 0px;
+    left: 700px;
+    color: rgb(196, 12, 12);
+    font-size: 2em;
+}
