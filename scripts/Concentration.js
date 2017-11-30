@@ -4,30 +4,30 @@
 */
 
 // Game View Section
-var view = {
+let view = {
 	displayFinal: function (msg) {
-		var final = getEID("final");
+		let final = getEID("final");
 		final.innerHTML = msg;
 	},
 };
 
 // Game Model Section
 
-var card_array = ['url(images/card1.jpg) no-repeat','url(images/card1.jpg) no-repeat',
+let card_array = ['url(images/card1.jpg) no-repeat','url(images/card1.jpg) no-repeat',
                 'url(images/card2.jpg) no-repeat','url(images/card2.jpg) no-repeat',
                 'url(images/card3.jpg) no-repeat','url(images/card3.jpg) no-repeat',
                 'url(images/card4.jpg) no-repeat','url(images/card4.jpg) no-repeat',
                 'url(images/card5.jpg) no-repeat','url(images/card5.jpg) no-repeat',
                 'url(images/card6.jpg) no-repeat','url(images/card6.jpg) no-repeat'];
-var card_values = [];
-var card_card_ids = [];
-var cards_flipped = 0;
-var guesses = 0;
+let card_values = [];
+let card_card_ids = [];
+let cards_flipped = 0;
+let guesses = 0;
 
 //Had to borrow this code, still figuring out the constructors
 Array.prototype.concentration_card_shuffle = function(){
-    var i = this.length, j, temp;
-    while(--i > 0){
+    let i = this.length-1, j, temp;
+    for (i - 1; i > 0; i -= 1) {    
         j = Math.floor(Math.random() * (i+1));
         temp = this[j];
         this[j] = this[i];
@@ -36,9 +36,9 @@ Array.prototype.concentration_card_shuffle = function(){
 }
 function newBoard(){
 	cards_flipped = 0;
-	var output = '';
+	let output = '';
     card_array.concentration_card_shuffle();
-	for(var i = 0; i < card_array.length; i++){
+	for(let i = 0; i < card_array.length; i++){
         //set card id to i and assign value from array equivalent position for each document element
         /*
         example output <div id="card_0" onclick="concentrationFlipcard(this,'url(images/card1.jpg) no-repeat')"></div>
@@ -83,8 +83,8 @@ function concentrationFlipcard(card,imgID){
                     } else {
                         function flip2Back(){
                             // Flip the 2 cards back over
-                            var card1 = document.getElementById(card_card_ids[0]);
-                            var card2 = document.getElementById(card_card_ids[1]);
+                            let card1 = document.getElementById(card_card_ids[0]);
+                            let card2 = document.getElementById(card_card_ids[1]);
                             card1.style.background = 'url(images/BackofCard.jpg) no-repeat';
                             card1.innerHTML = "";
                             card2.style.background = 'url(images/BackofCard.jpg) no-repeat';
