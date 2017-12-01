@@ -29,8 +29,23 @@ div#concentration_board > div{
 
 div#final {
     position: absolute;
-    top: 0px;
-    left: 700px;
-    color: rgb(196, 12, 12);
+    width: 770px;
+    top: 835px;
+    left: 572px;
+    background: rgb(17, 17, 17);
+    color: rgb(78, 122, 158);
     font-size: 2em;
+}
+form {
+    position: absolute;
+    top: 875px;
+    left: 900px;
+    padding: 2px;
+    background-color: rgb(255, 255, 255);
+}
+
+form input {
+    background-color: rgb(78, 122, 158);
+    border-color: rgb(4, 49, 21);
+    font-size: 1em;
 }

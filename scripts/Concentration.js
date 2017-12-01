@@ -6,7 +6,7 @@
 // Game View Section
 let view = {
 	displayFinal: function (msg) {
-		let final = getEID("final");
+		let final = document.getElementById("final");
 		final.innerHTML = msg;
 	},
 };
@@ -24,7 +24,7 @@ let card_card_ids = [];
 let cards_flipped = 0;
 let guesses = 0;
 
-//Had to borrow this code, still figuring out the constructors
+//Adds to Big"O" this algorithm to shuffle the card array, so it can be called anytime
 Array.prototype.concentration_card_shuffle = function(){
     let i = this.length-1, j, temp;
     for (i - 1; i > 0; i -= 1) {    
@@ -45,7 +45,8 @@ function newBoard(){
         */
         output += '<div id="card_'+i+'" onclick="concentrationFlipcard(this,\''+card_array[i]+'\')"></div>'; 
 	}
-	document.getElementById('concentration_board').innerHTML = output;
+    document.getElementById('concentration_board').innerHTML = output;
+    document.getElementById("Button").style.visibility = "hidden"; 
 }
 function concentrationFlipcard(card,imgID){
             let val = imgID.slice(15,16);
@@ -61,24 +62,25 @@ function concentrationFlipcard(card,imgID){
                 } else if(card_values.length === 1){
                     card_values.push(val);
                     card_card_ids.push(card.id);
-                    guesses += 1;
-                    console.log(card_values);
+                    guesses += 1;                    
                 //check to see if match, if so add to total cards fliped count and clear holding arrays
                     if(card_values[0] === card_values[1]){
                         cards_flipped += 2; 
-                        console.log(cards_flipped);
-                        console.log(card_array.length);
                         // Clear both holding arrays
                         card_values = [];
                         card_card_ids = [];
                         // Check to see if the whole board is cleared
                         if(cards_flipped === card_array.length){
-                            //add text area here, and a score count, and not just and alert.
-                            alert("Great Memory!, you have matched everything in "+ guesses +" guesses");
+                            //Display results
+                            let pct = 6/guesses * 100
+                            view.displayFinal("Great Memory! " + guesses + " guesses!\  "+Math.round(pct)+ " Percent out of 100 chance.");
                             //clear board
-                            document.getElementById('concentration_board').innerHTML = "";
-                            //Build New Game                            
-                            newBoard();
+                            let result = function(){document.getElementById('final').innerHTML= ""};
+                            setTimeout(result,5000);
+                            // Restart game button onclick handler
+	                        let Button = document.getElementById("Button");
+                            Button.onclick = handleButton;
+                            document.getElementById("Button").style.visibility = "visible";
                         }
                     } else {
                         function flip2Back(){
@@ -98,9 +100,11 @@ function concentrationFlipcard(card,imgID){
                 }
             }
         }
-
-
-
+        function handleButton() {
+            document.getElementById('concentration_board').innerHTML = "";
+            //Build New Game                            
+            newBoard();
+        }
 
 
 window.onload = newBoard();
