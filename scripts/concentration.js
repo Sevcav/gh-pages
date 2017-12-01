@@ -13,12 +13,12 @@ let view = {
 
 // Game Model Section
 
-let card_array = ['url(../images/card1.jpg) no-repeat','url(../images/card1.jpg) no-repeat',
-                'url(../images/card2.jpg) no-repeat','url(../images/card2.jpg) no-repeat',
-                'url(../images/card3.jpg) no-repeat','url(../images/card3.jpg) no-repeat',
-                'url(../images/card4.jpg) no-repeat','url(../images/card4.jpg) no-repeat',
-                'url(../images/card5.jpg) no-repeat','url(../images/card5.jpg) no-repeat',
-                'url(../images/card6.jpg) no-repeat','url(../images/card6.jpg) no-repeat'];
+let card_array = ['url("../images/card1.jpg") no-repeat','url("../images/card1.jpg") no-repeat',
+                'url("../images/card2.jpg") no-repeat','url("../images/card2.jpg") no-repeat',
+                'url("../images/card3.jpg") no-repeat','url("../images/card3.jpg") no-repeat',
+                'url("../images/card4.jpg") no-repeat','url("../images/card4.jpg") no-repeat',
+                'url("../images/card5.jpg") no-repeat','url("../images/card5.jpg") no-repeat',
+                'url("../images/card6.jpg") no-repeat','url("../images/card6.jpg") no-repeat'];
 let card_values = [];
 let card_card_ids = [];
 let cards_flipped = 0;
@@ -72,7 +72,7 @@ function concentrationFlipcard(card,imgID){
                         // Check to see if the whole board is cleared
                         if(cards_flipped === card_array.length){
                             //Display results
-                            let pct = 6/guesses * 100
+                            let pct = 12/guesses * 100
                             view.displayFinal("Great Memory! " + guesses + " guesses!\  "+Math.round(pct)+ " Percent out of 100 chance.");
                             //clear board
                             let result = function(){document.getElementById('final').innerHTML= ""};
@@ -87,9 +87,9 @@ function concentrationFlipcard(card,imgID){
                             // Flip the 2 cards back over
                             let card1 = document.getElementById(card_card_ids[0]);
                             let card2 = document.getElementById(card_card_ids[1]);
-                            card1.style.background = 'url(../images/BackofCard.jpg) no-repeat';
+                            card1.style.background = 'url("../images/BackofCard.jpg") no-repeat';
                             card1.innerHTML = "";
-                            card2.style.background = 'url(../images/BackofCard.jpg) no-repeat';
+                            card2.style.background = 'url("../images/BackofCard.jpg") no-repeat';
                             card2.innerHTML = "";
                             // Clear both arrays
                             card_values = [];
