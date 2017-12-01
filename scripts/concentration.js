@@ -12,13 +12,12 @@ let view = {
 };
 
 // Game Model Section
-
-let card_array = ['url(images/Card1.jpg) no-repeat','url(images/Card1.jpg) no-repeat',
-                'url(images/Card2.jpg) no-repeat','url(images/Card2.jpg) no-repeat',
-                'url(images/Card3.jpg) no-repeat','url(images/Card3.jpg) no-repeat',
-                'url(images/Card4.jpg) no-repeat','url(images/Card4.jpg) no-repeat',
-                'url(images/Card5.jpg) no-repeat','url(images/Card5.jpg) no-repeat',
-                'url(images/Card6.jpg) no-repeat','url(images/Card6.jpg) no-repeat'];
+let card_array = ['url(images/Card1.JPG) no-repeat','url(images/Card1.JPG) no-repeat',
+                'url(images/Card2.JPG) no-repeat','url(images/Card2.JPG) no-repeat',
+                'url(images/Card3.JPG) no-repeat','url(images/Card3.JPG) no-repeat',
+                'url(images/Card4.JPG) no-repeat','url(images/Card4.JPG) no-repeat',
+                'url(images/Card5.JPG) no-repeat','url(images/Card5.JPG) no-repeat',
+                'url(images/Card6.JPG) no-repeat','url(images/Card6.JPG) no-repeat'];
 let card_values = [];
 let card_card_ids = [];
 let cards_flipped = 0;
@@ -41,7 +40,7 @@ function newBoard(){
 	for(let i = 0; i < card_array.length; i++){
         //set card id to i and assign value from array equivalent position for each document element
         /*
-        example output <div id="card_0" onclick="concentrationFlipcard(this,'url(images/card1.jpg) no-repeat')"></div>
+        example output <div id="card_0" onclick="concentrationFlipcard(this,'url(images/card1.JPG) no-repeat')"></div>
         */
         output += '<div id="card_'+i+'" onclick="concentrationFlipcard(this,\''+card_array[i]+'\')"></div>'; 
 	}
