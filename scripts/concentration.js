@@ -13,12 +13,12 @@ let view = {
 
 // Game Model Section
 
-let card_array = ['url(images/card1.jpg) no-repeat','url(images/card1.jpg) no-repeat',
-                'url(images/card2.jpg) no-repeat','url(images/card2.jpg) no-repeat',
-                'url(images/card3.jpg) no-repeat','url(images/card3.jpg) no-repeat',
-                'url(images/card4.jpg) no-repeat','url(images/card4.jpg) no-repeat',
-                'url(images/card5.jpg) no-repeat','url(images/card5.jpg) no-repeat',
-                'url(images/card6.jpg) no-repeat','url(images/card6.jpg) no-repeat'];
+let card_array = ['url(images/Card1.jpg) no-repeat','url(images/Card1.jpg) no-repeat',
+                'url(images/Card2.jpg) no-repeat','url(images/Card2.jpg) no-repeat',
+                'url(images/Card3.jpg) no-repeat','url(images/Card3.jpg) no-repeat',
+                'url(images/Card4.jpg) no-repeat','url(images/Card4.jpg) no-repeat',
+                'url(images/Card5.jpg) no-repeat','url(images/Card5.jpg) no-repeat',
+                'url(images/Card6.jpg) no-repeat','url(images/Card6.jpg) no-repeat'];
 let card_values = [];
 let card_card_ids = [];
 let cards_flipped = 0;
@@ -72,7 +72,7 @@ function concentrationFlipcard(card,imgID){
                         // Check to see if the whole board is cleared
                         if(cards_flipped === card_array.length){
                             //Display results
-                            let pct = 12/guesses * 100
+                            let pct = 6/guesses * 100
                             view.displayFinal("Great Memory! " + guesses + " guesses!\  "+Math.round(pct)+ " Percent out of 100 chance.");
                             //clear board
                             let result = function(){document.getElementById('final').innerHTML= ""};
