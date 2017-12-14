@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>MasterMind</title>
+
+	<!--href sets lin to style within style folder -->
+<link rel="stylesheet" type="text/css" href="styles/mastermind.css"> 
+</head>
+
+<body>
+	<!--
+		<style>
+				table, th, td {
+					border: 1px solid rgb(255, 253, 253);
+				}
+		</style>
+	-->
+	<div id="board">
+		<table>
+			<tr>
+				<td id="00"></td>
+				<td id="01"></td>
+				<td id="02"></td>
+				<td id="03"></td>
+				<td id="04"></td>
+				<td id="05"><img src="images/w.png" alt="White" width="65" height="70" border="0"/></td>
+				<td id="06" valign="center" align="center"><font color ="white">Active Color Choice</font></td>
+			</tr>
+			<tr>
+				<td id="10"><img src="images/rnd8.png" alt="White" width="65" height="70" border="0"/></td>
+				<td id="11" onmousedown="mDownCheckScore(this)"><img src="images/flage.png" alt="White" width="65" height="70" border="0"/></td>
+				<td id="12" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						 <img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="13" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="14" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="15" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+
+			</tr>
+			<tr>
+				<td id="20"><img src="images/rnd7.png" alt="White" width="65" height="70" border="0"/></td>
+				<td id="21" onmousedown="mDownCheckScore(this)"><img src="images/flage.png" alt="White" width="65" height="70" border="0"/></td>
+				<td id="22" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="23" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="24" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="25" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+
+			</tr>
+			<tr>
+				<td id="30"><img src="images/rnd6.png" alt="White" width="65" height="70" border="0"/></td>
+				<td id="31" onmousedown="mDownCheckScore(this)"><img src="images/flage.png" alt="White" width="65" height="70" border="0"/></td>
+				<td id="32" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="33" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="34" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="35" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+
+			</tr>
+			<tr>
+				<td id="40"><img src="images/rnd5.png" alt="White" width="65" height="70" border="0"/></td>
+				<td id="41" onmousedown="mDownCheckScore(this)"><img src="images/flage.png" alt="White" width="65" height="70" border="0"/></td>
+				<td id="42" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="43" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="44" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="45" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+
+			</tr>
+			<tr>
+				<td id="50"><img src="images/rnd4.png" alt="White" width="65" height="70" border="0"/></td>
+				<td id="51" onmousedown="mDownCheckScore(this)"><img src="images/flage.png" alt="White" width="65" height="70" border="0"/></td>
+				<td id="52" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="53" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="54" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="55" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+
+			</tr>
+			<tr>
+				<td id="60"><img src="images/rnd3.png" alt="White" width="65" height="70" border="0"/></td>
+				<td id="61" onmousedown="mDownCheckScore(this)"><img src="images/flage.png" alt="White" width="65" height="70" border="0"/></td>
+				<td id="62" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="63" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="64" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="65" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+
+			</tr>
+			<tr>
+				<td id="70"><img src="images/rnd2.png" alt="White" width="65" height="70" border="0"/></td>
+				<td id="71" onmousedown="mDownCheckScore(this)"><img src="images/flage.png" alt="White" width="65" height="70" border="0"/></td>
+				<td id="72" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="73" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="74" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="75" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+
+			</tr>	
+			<tr>
+				<td id="80"><img src="images/rnd1c.png" alt="White" width="65" height="70" border="0"/></td>
+				<td id="81" onmousedown="mDownCheckScore(this)"><img src="images/flage.png" alt="White" width="65" height="70" border="0"/></td>
+				<td id="82" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="83" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="84" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+				<td id="85" onmousedown="mDownGuess(this)" width="65" valign="center" height="70" background="" align="center">
+						<img src="images/e.png" alt="Empty" width="65" height="70" border="0"></td>
+
+			</tr>
+				<tr>
+					<td id="c0" width="65" valign="center" height="70" background="" align="center" onmouseover="mOver(this)"
+					onmouseout="mOut(this)" onclick="mDownColorPick(this)" img src="images/w.png" alt="White" width="65" height="70" border="0">w</td>
+					<td id="c1" width="65" valign="center" height="70" background="" align="center" onmouseover="mOver(this)"
+					onmouseout="mOut(this)" onclick="mDownColorPick(this)" img src="images/p.png" alt="Pink" width="65" height="70" border="0">p</td>
+					<td id="c2" width="65" valign="center" height="70" background="" align="center" onmouseover="mOver(this)"
+					onmouseout="mOut(this)" onclick="mDownColorPick(this)" img src="images/y.png" alt="Yellow" width="65" height="70" border="0">y</td>
+					<td id="c3" width="65" valign="center" height="70" background="" align="center" onmouseover="mOver(this)"
+					onmouseout="mOut(this)" onclick="mDownColorPick(this)" img src="images/g.png" alt="Green" width="65" height="70" border="0">g</td>
+					<td id="c4" width="65" valign="center" height="70" background="" align="center" onmouseover="mOver(this)"
+					onmouseout="mOut(this)" onclick="mDownColorPick(this)" img src="images/r.png" alt="Red" width="65" height="70" border="0">r</td>
+					<td id="c5" width="65" valign="center" height="70" background="" align="center" onmouseover="mOver(this)"
+					onmouseout="mOut(this)" onclick="mDownColorPick(this)" img src="images/b.png" alt="Blue" width="65" height="70" border="0">b</td>
+					<td id="c6" valign="center" align="center"><font color ="white"> (-- Select Color </font>
+				</tr>
+			</table> 
+	</div>
+	<p><font color ="white">
+			Scoring: You get one small black peg for a guess of the right color in the right location and one small white peg for a guess of of the right color but in the wrong position.<br>
+			The relative locations of the scoring (small black and white) pegs does not necessarily reveal which pegs in your guess are correct.
+		<ol>
+			How to Play: 
+			<li>Select a colored peg from the tray by clicking the desired color. The color selected will be dispalyed in the upper right of board. 
+			<li>Starting at Turn 1, place a colored peg in each of the holes. Just click on the hole to place a peg of the Active Color. 
+			<li>You can change the color of any peg in the current row by selecting a new Active Color, and clicking on the peg you want to change. 
+			<li>Click the scoring flag for that turn (Square with 4 holes) to see how closely your guess matches the secret vault pattern.
+			<li>Proceed to the next row using the information provided by the scoring of previous rows. 
+			<li>When your guess matches the secret pattern, you win! 
+			<li>After 8 turns you still have not matched the secret pattern, the game will end and show the secret vault pattern. 
+		</ol>
+		</font>
+	</p> 
+
+	<script src="scripts/mastermind.js" />
+	</script>
+</body>
+</html>
+<!--
+	<form>
+		<input type="text" id="guessInput" placeholder="A0">
+		<input type="button" id="fireButton" value="Fire!">
+</form>
+-->
